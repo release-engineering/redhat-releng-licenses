@@ -1,0 +1,128 @@
+<!--
+
+    Copyright (C) 2018 Red Hat, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>9</version>
+  </parent>
+
+  <groupId>com.redhat.rcm</groupId>
+  <artifactId>redhat-releng-license-parent</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Red Hat RelEng License Module</name>
+
+  <url>https://github.com/release-engineering/redhat-releng-licenses</url>
+
+  <description>Red Hat Release Engineering License Module</description>
+  <inceptionYear>2018</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>ncross</id>
+      <email>ncross@redhat.com</email>
+      <name>Nick Cross</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/release-engineering/redhat-releng-licenses.git</connection>
+    <developerConnection>scm:git:git@github.com:release-engineering/redhat-releng-licenses.git</developerConnection>
+    <url>http://github.com/release-engineering/redhat-releng-licenses</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <modules>
+    <module>license</module>
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultSpecificationEntries>
+                  true
+                </addDefaultSpecificationEntries>
+                <addDefaultImplementationEntries>
+                  true
+                </addDefaultImplementationEntries>
+              </manifest>
+              <manifestEntries>
+                <Implementation-URL>${project.url}</Implementation-URL>
+                <Java-Version>${java.version}</Java-Version>
+                <Java-Vendor>${java.vendor}</Java-Vendor>
+                <Os-Name>${os.name}</Os-Name>
+                <Os-Arch>${os.arch}</Os-Arch>
+                <Os-Version>${os.version}</Os-Version>
+                <Scm-Url>${project.scm.url}</Scm-Url>
+                <Scm-Connection>${project.scm.connection}</Scm-Connection>
+                <Scm-Revision>${buildNumber}</Scm-Revision>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildnumber-maven-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <phase>validate</phase>
+              <id>buildnumber</id>
+              <goals>
+                <goal>create</goal>
+              </goals>
+              <configuration>
+                <shortRevisionLength>8</shortRevisionLength>
+                <timestampFormat>{0,date,dd MMMM yyyy}</timestampFormat>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
