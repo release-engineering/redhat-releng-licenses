@@ -26,7 +26,7 @@
 
   <groupId>com.redhat.rcm</groupId>
   <artifactId>redhat-releng-license-parent</artifactId>
-  <version>2</version>
+  <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Red Hat RelEng License Module</name>
